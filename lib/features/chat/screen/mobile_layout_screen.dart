@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
+import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
+import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
@@ -102,10 +106,31 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         ),
         body: TabBarView(
           controller: tabBarController,
-          children: const [
-            Text("Chats"),
-            Text("Status"),
-            Text("Calls"),
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text("Chat"),
+                ],
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text("Status"),
+                ],
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text("Calls"),
+                ],
+              ),
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -119,6 +144,28 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           ),
         ),
       ),
+    );
+  }
+}
+
+class ExitButton extends StatelessWidget {
+  const ExitButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(
+      text: "Sign Out",
+      onPressed: () async {
+        final authRepository = AuthRepository(
+          auth: FirebaseAuth.instance,
+          firestore: FirebaseFirestore.instance,
+        );
+        await authRepository.signOut(context);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(LandingScreen.routeName, (route) => false);
+      },
     );
   }
 }

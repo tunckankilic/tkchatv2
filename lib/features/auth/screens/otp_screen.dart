@@ -3,11 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 
-
 class OTPScreen extends ConsumerWidget {
   static const String routeName = '/otp-screen';
   final String verificationId;
-  const OTPScreen({
+  OTPScreen({
     Key? key,
     required this.verificationId,
   }) : super(key: key);
@@ -20,6 +19,7 @@ class OTPScreen extends ConsumerWidget {
         );
   }
 
+  FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
@@ -48,6 +48,7 @@ class OTPScreen extends ConsumerWidget {
                 keyboardType: TextInputType.number,
                 onChanged: (val) {
                   if (val.length == 6) {
+                    focusNode.unfocus();
                     verifyOTP(ref, context, val.trim());
                   }
                 },

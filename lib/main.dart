@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tkchatv2/common/mobile_layout_screen.dart';
+import 'package:tkchatv2/features/chat/screen/mobile_layout_screen.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/widgets/error.dart';
 import 'package:tkchatv2/common/widgets/loader.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tkchatv2/common/widgets/error.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
+import 'package:tkchatv2/features/chat/screen/mobile_chat_screen.dart';
+import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,6 +25,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UserInformationScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const UserInformationScreen(),
+      );
+    case MobileChatScreen.routeName:
+      final arguments = settings.arguments as Map<String, dynamic>;
+      final name = arguments["name"];
+      final uid = arguments["uid"];
+      return MaterialPageRoute(
+        builder: (context) => MobileChatScreen(
+          name: name,
+          uid: uid,
+        ),
+      );
+    case LandingScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const LandingScreen(),
       );
     default:
       return MaterialPageRoute(

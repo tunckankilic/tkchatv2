@@ -4,6 +4,7 @@ import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 
 class LandingScreen extends StatelessWidget {
+  static const routeName = "/landing";
   const LandingScreen({Key? key}) : super(key: key);
 
   void navigateToLoginScreen(BuildContext context) {

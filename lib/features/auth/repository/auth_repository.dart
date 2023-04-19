@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tkchatv2/common/mobile_layout_screen.dart';
+import 'package:tkchatv2/features/chat/screen/mobile_layout_screen.dart';
 import 'package:tkchatv2/common/repositories/common_firebase_storage_repository.dart';
 import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/features/auth/screens/otp_screen.dart';
@@ -134,5 +134,9 @@ class AuthRepository {
     await firestore.collection('users').doc(auth.currentUser!.uid).update({
       'isOnline': isOnline,
     });
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    await auth.signOut();
   }
 }
