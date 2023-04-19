@@ -21,9 +21,9 @@ class LandingScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 50),
             const Text(
-              'Welcome to WhatsApp',
+              'Welcome to TKChat',
               style: TextStyle(
-                fontSize: 33,
+                fontSize: 28,
                 fontWeight: FontWeight.w600,
               ),
             ),

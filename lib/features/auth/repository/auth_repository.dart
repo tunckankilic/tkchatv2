@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tkchatv2/common/mobile_layout_screen.dart';
 import 'package:tkchatv2/common/repositories/common_firebase_storage_repository.dart';
 import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/features/auth/screens/otp_screen.dart';
@@ -90,7 +91,7 @@ class AuthRepository {
     try {
       String uid = auth.currentUser!.uid;
       String photoUrl =
-          'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
+          "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3APerson_icon_BLACK-01.svg&psig=AOvVaw07VSQ_qDU3FuiLjSmBgXcD&ust=1681927167292000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNDyzIyBtP4CFQAAAAAdAAAAABAE";
 
       if (profilePic != null) {
         photoUrl = await ref
@@ -111,6 +112,11 @@ class AuthRepository {
       );
 
       await firestore.collection('users').doc(uid).set(user.toMap());
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const MobileLayoutScreen(),
+          ),
+          (route) => false);
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }

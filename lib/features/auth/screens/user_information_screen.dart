@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 
-
 class UserInformationScreen extends ConsumerStatefulWidget {
   static const String routeName = '/user-information';
   const UserInformationScreen({Key? key}) : super(key: key);
@@ -55,8 +54,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                   image == null
                       ? const CircleAvatar(
                           backgroundImage: NetworkImage(
-                            'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
-                          ),
+                              "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3APerson_icon_BLACK-01.svg&psig=AOvVaw07VSQ_qDU3FuiLjSmBgXcD&ust=1681927167292000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNDyzIyBtP4CFQAAAAAdAAAAABAE"),
                           radius: 64,
                         )
                       : CircleAvatar(

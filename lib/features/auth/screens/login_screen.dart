@@ -6,7 +6,6 @@ import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 
-
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
   const LoginScreen({Key? key}) : super(key: key);
@@ -84,9 +83,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: size.height * 0.6),
+              SizedBox(height: size.height * 0.5),
               SizedBox(
-                width: 90,
+                width: 100,
                 child: CustomButton(
                   onPressed: sendPhoneNumber,
                   text: 'NEXT',
