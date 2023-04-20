@@ -1,8 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/widgets/loader.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
+import 'package:tkchatv2/features/chat/controller/chat_controller.dart';
 import 'package:tkchatv2/features/chat/widgets/chat_list.dart';
 import 'package:tkchatv2/models/models.dart';
 
@@ -61,34 +64,56 @@ class MobileChatScreen extends ConsumerWidget {
         ],
       ),
       body: Column(
-        children: const [
-          Expanded(
+        children: [
+          const Expanded(
             child: ChatList(),
           ),
-          MessageChatField(),
+          MessageChatField(
+            recieverUserId: uid,
+          ),
         ],
       ),
     );
   }
 }
 
-class MessageChatField extends StatefulWidget {
+class MessageChatField extends ConsumerStatefulWidget {
+  final String recieverUserId;
   const MessageChatField({
     super.key,
+    required this.recieverUserId,
   });
 
   @override
-  State<MessageChatField> createState() => _MessageChatFieldState();
+  ConsumerState<MessageChatField> createState() => _MessageChatFieldState();
 }
 
-class _MessageChatFieldState extends State<MessageChatField> {
+class _MessageChatFieldState extends ConsumerState<MessageChatField> {
   bool isShowSendButton = false;
+  final TextEditingController _messageController = TextEditingController();
+  void sendTextMessage() async {
+    if (isShowSendButton) {
+      ref.read(chatControllerProvider).sendTextMessage(
+            context: context,
+            text: _messageController.text,
+            recieverUserId: widget.recieverUserId,
+          );
+    }
+  }
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: TextField(
+            controller: _messageController,
             onChanged: (value) {
               if (value.isNotEmpty) {
                 setState(() {
@@ -163,10 +188,17 @@ class _MessageChatFieldState extends State<MessageChatField> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8, right: 2, left: 2),
-          child: CircleAvatar(
-            backgroundColor: const Color.fromRGBO(5, 96, 98, 1),
-            radius: 25,
-            child: Icon(isShowSendButton ? Icons.send : Icons.mic),
+          child: GestureDetector(
+            onTap: () {
+              if (_messageController.text.isEmpty) return;
+              sendTextMessage();
+              _messageController.clear();
+            },
+            child: CircleAvatar(
+              backgroundColor: const Color.fromRGBO(5, 96, 98, 1),
+              radius: 25,
+              child: Icon(isShowSendButton ? Icons.send : Icons.mic),
+            ),
           ),
         )
       ],
