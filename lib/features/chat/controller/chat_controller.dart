@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tkchatv2/common/enums/message_enum.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/repository/chat_repository.dart';
+import 'package:tkchatv2/models/chat_contact.dart';
+import 'package:tkchatv2/models/message.dart';
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
@@ -27,5 +32,31 @@ class ChatController {
             senderUser: value!,
           ),
         );
+  }
+
+  void sendFileMessage({
+    required BuildContext context,
+    required File file,
+    required MessageEnum messageEnum,
+    required String recieverUserId,
+  }) {
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendFileMessage(
+            context: context,
+            file: file,
+            recieverUserId: recieverUserId,
+            senderUserData: value!,
+            ref: ref,
+            messageEnum: messageEnum,
+          ),
+        );
+  }
+
+  Stream<List<Message>> chatStream(String recieverUserId) {
+    return chatRepository.getChatStream(recieverUserId);
+  }
+
+  Stream<List<ChatContact>> chatContacts() {
+    return chatRepository.getChatContacts();
   }
 }

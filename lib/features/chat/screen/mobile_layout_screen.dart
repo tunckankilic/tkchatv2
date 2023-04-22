@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
+import 'package:tkchatv2/features/chat/widgets/chat_list.dart';
+import 'package:tkchatv2/features/chat/widgets/contacts_list.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 
@@ -34,6 +36,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
+    //Shows the Online/Offline status
     switch (state) {
       case AppLifecycleState.resumed:
         ref.read(authControllerProvider).setUserState(true);
@@ -107,14 +110,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         body: TabBarView(
           controller: tabBarController,
           children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Chat"),
-                ],
-              ),
-            ),
+            ContactsList(),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -28,6 +28,7 @@ class LandingScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            
             SizedBox(height: size.height / 28),
             Image.asset(
               'assets/bg.png',

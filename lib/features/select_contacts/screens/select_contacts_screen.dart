@@ -40,25 +40,26 @@ class SelectContactsScreen extends ConsumerWidget {
       ),
       body: ref.watch(getContactsProvider).when(
             data: (contactList) => ListView.builder(
-                itemCount: contactList.length,
-                itemBuilder: (context, index) {
-                  final contact = contactList[index];
-                  return InkWell(
-                    onTap: () => selectContact(ref, contact, context),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: ListTile(
-                        leading: contact.photo == null
-                            ? null
-                            : CircleAvatar(
-                                backgroundImage: MemoryImage(contact.photo!),
-                                radius: 30,
-                              ),
-                        title: Text(contact.displayName),
-                      ),
+              itemCount: contactList.length,
+              itemBuilder: (context, index) {
+                final contact = contactList[index];
+                return InkWell(
+                  onTap: () => selectContact(ref, contact, context),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: ListTile(
+                      leading: contact.photo == null
+                          ? null
+                          : CircleAvatar(
+                              backgroundImage: MemoryImage(contact.photo!),
+                              radius: 30,
+                            ),
+                      title: Text(contact.displayName),
                     ),
-                  );
-                }),
+                  ),
+                );
+              },
+            ),
             error: (err, trace) => ErrorScreen(error: err.toString()),
             loading: () => const Loader(),
           ),
