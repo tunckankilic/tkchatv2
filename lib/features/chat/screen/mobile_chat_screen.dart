@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/widgets/loader.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
-import 'package:tkchatv2/features/chat/controller/chat_controller.dart';
 import 'package:tkchatv2/features/chat/widgets/chat_list.dart';
 import 'package:tkchatv2/features/chat/widgets/message_chat_field.dart';
 import 'package:tkchatv2/models/models.dart';

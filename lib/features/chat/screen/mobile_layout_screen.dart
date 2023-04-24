@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
-import 'package:tkchatv2/features/chat/widgets/chat_list.dart';
 import 'package:tkchatv2/features/chat/widgets/contacts_list.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
