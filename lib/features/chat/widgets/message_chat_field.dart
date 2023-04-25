@@ -9,9 +9,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tkchatv2/common/enums/message_enum.dart';
+import 'package:tkchatv2/common/providers/message_reply_provider.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
 import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/features/chat/controller/chat_controller.dart';
+import 'package:tkchatv2/features/chat/widgets/message_reply.dart';
 
 class MessageChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
@@ -170,8 +172,11 @@ class _MessageChatFieldState extends ConsumerState<MessageChatField> {
 
   @override
   Widget build(BuildContext context) {
+    final messageReply = ref.watch(messageReplyProvider);
+    final isShowMessageReply = messageReply != null;
     return Column(
       children: [
+        isShowMessageReply ? const MessageReplyWidget() : SizedBox(),
         Row(
           children: [
             Expanded(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/enums/message_enum.dart';
+import 'package:tkchatv2/common/providers/message_reply_provider.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/repository/chat_repository.dart';
 import 'package:tkchatv2/models/chat_contact.dart';
@@ -24,13 +25,14 @@ class ChatController {
       {required BuildContext context,
       required String text,
       required String recieverUserId}) {
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendTextMessage(
-            context: context,
-            text: text,
-            recieverUserId: recieverUserId,
-            senderUser: value!,
-          ),
+              context: context,
+              text: text,
+              recieverUserId: recieverUserId,
+              senderUser: value!,
+              messageReply: messageReply),
         );
   }
 
@@ -40,15 +42,17 @@ class ChatController {
     required MessageEnum messageEnum,
     required String recieverUserId,
   }) {
+    final messageReply = ref.read(messageReplyProvider);
+
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendFileMessage(
-            context: context,
-            file: file,
-            recieverUserId: recieverUserId,
-            senderUserData: value!,
-            ref: ref,
-            messageEnum: messageEnum,
-          ),
+              context: context,
+              file: file,
+              recieverUserId: recieverUserId,
+              senderUserData: value!,
+              ref: ref,
+              messageEnum: messageEnum,
+              messageReply: messageReply),
         );
   }
 
@@ -68,6 +72,7 @@ class ChatController {
     int gifUrlPartIndex = gifUrl.lastIndexOf("-") + 1;
     String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
     String newGifUrl = "https://i.giphy.com/media/$gifUrlPart/200.gif";
+    final messageReply = ref.read(messageReplyProvider);
 
     ref
         .read(userDataAuthProvider)
@@ -76,6 +81,7 @@ class ChatController {
               gifUrl: newGifUrl,
               recieverUserId: recieverUserId,
               senderUser: value!,
+              messageReply: messageReply,
             ));
   }
 }

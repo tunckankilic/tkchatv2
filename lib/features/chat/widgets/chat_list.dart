@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
-import 'package:tkchatv2/common/utils/info.dart';
+import 'package:tkchatv2/common/enums/message_enum.dart';
+import 'package:tkchatv2/common/providers/message_reply_provider.dart';
 import 'package:tkchatv2/common/widgets/loader.dart';
 import 'package:tkchatv2/features/chat/controller/chat_controller.dart';
 import 'package:tkchatv2/features/chat/widgets/widgets.dart';
@@ -23,6 +24,16 @@ class ChatList extends ConsumerStatefulWidget {
 
 class _ChatListState extends ConsumerState<ChatList> {
   final ScrollController messageController = ScrollController();
+
+  void onMessageSwipe(
+      {required String message,
+      required bool isMe,
+      required MessageEnum messageEnum}) {
+    ref.read(messageReplyProvider.notifier).update(
+          (state) => MessageReply(message, isMe, messageEnum),
+        );
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -49,8 +60,17 @@ class _ChatListState extends ConsumerState<ChatList> {
           itemBuilder: (context, index) {
             final messageData = snapshot.data![index];
             var timeSent = DateFormat.Hm().format(messageData.timeSent);
-            if (messages[index]['isMe'] == true) {
+            if (messageData.senderId ==
+                FirebaseAuth.instance.currentUser!.uid) {
               return MyMessageCard(
+                repliedText: messageData.repliedMessage,
+                repliedMessageType: messageData.repliedMessageType,
+                username: messageData.repliedTo,
+                onLeftSwipe: () => onMessageSwipe(
+                  message: messageData.text,
+                  isMe: true,
+                  messageEnum: messageData.type,
+                ),
                 message: messageData.text,
                 date: timeSent,
                 type: messageData.type,
