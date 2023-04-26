@@ -14,7 +14,7 @@ class MyMessageCard extends StatelessWidget {
   final String repliedText;
   final String username;
   final MessageEnum repliedMessageType;
-
+//
   const MyMessageCard({
     Key? key,
     required this.message,
@@ -28,6 +28,7 @@ class MyMessageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isReplying = repliedText.isNotEmpty;
     return SwipeTo(
       onLeftSwipe: onLeftSwipe,
       child: Align(
@@ -38,7 +39,8 @@ class MyMessageCard extends StatelessWidget {
           ),
           child: Card(
             elevation: 1,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             color: messageColor,
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             child: Stack(
@@ -57,9 +59,44 @@ class MyMessageCard extends StatelessWidget {
                           top: 5,
                           bottom: 20,
                         ),
-                  child: DisplayCard(
-                    message: message,
-                    type: type,
+                  child: Column(
+                    children: [
+                      if (isReplying) ...[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              username,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: backgroundColor.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: DisplayCard(
+                                message: repliedText,
+                                type: repliedMessageType,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      DisplayCard(
+                        message: message,
+                        type: type,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(

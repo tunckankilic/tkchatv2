@@ -34,6 +34,7 @@ class ChatController {
               senderUser: value!,
               messageReply: messageReply),
         );
+    ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 
   void sendFileMessage({
@@ -54,6 +55,7 @@ class ChatController {
               messageEnum: messageEnum,
               messageReply: messageReply),
         );
+    ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 
   Stream<List<Message>> chatStream(String recieverUserId) {
@@ -83,5 +85,6 @@ class ChatController {
               senderUser: value!,
               messageReply: messageReply,
             ));
+    ref.read(messageReplyProvider.notifier).update((state) => null);
   }
 }

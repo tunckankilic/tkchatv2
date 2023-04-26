@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/providers/message_reply_provider.dart';
+import 'package:tkchatv2/features/chat/widgets/display_card.dart';
 
 class MessageReplyWidget extends ConsumerWidget {
   const MessageReplyWidget({super.key});
@@ -15,6 +16,13 @@ class MessageReplyWidget extends ConsumerWidget {
     return Container(
       width: 350,
       padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
+      ),
       child: Column(
         children: [
           Row(
@@ -37,7 +45,10 @@ class MessageReplyWidget extends ConsumerWidget {
           const SizedBox(
             height: 8,
           ),
-          Text(messageReply.message),
+          DisplayCard(
+            message: messageReply.message,
+            type: messageReply.messageEnum,
+          ),
         ],
       ),
     );
