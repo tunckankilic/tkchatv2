@@ -25,12 +25,17 @@ class ChatList extends ConsumerStatefulWidget {
 class _ChatListState extends ConsumerState<ChatList> {
   final ScrollController messageController = ScrollController();
 
-  void onMessageSwipe(
-      {required String message,
-      required bool isMe,
-      required MessageEnum messageEnum}) {
+  void onMessageSwipe({
+    required String message,
+    required bool isMe,
+    required MessageEnum messageEnum,
+  }) {
     ref.read(messageReplyProvider.notifier).update(
-          (state) => MessageReply(message, isMe, messageEnum),
+          (state) => MessageReply(
+            message,
+            isMe,
+            messageEnum,
+          ),
         );
   }
 
@@ -60,9 +65,19 @@ class _ChatListState extends ConsumerState<ChatList> {
           itemBuilder: (context, index) {
             final messageData = snapshot.data![index];
             var timeSent = DateFormat.Hm().format(messageData.timeSent);
+            if (!messageData.isSeen &&
+                messageData.recieverid ==
+                    FirebaseAuth.instance.currentUser!.uid) {
+              ref.read(chatControllerProvider).setChatMessageSeen(
+                    context: context,
+                    recieverUserId: widget.recieverUserId,
+                    messageId: messageData.messageId,
+                  );
+            }
             if (messageData.senderId ==
                 FirebaseAuth.instance.currentUser!.uid) {
               return MyMessageCard(
+                isSeen: messageData.isSeen,
                 repliedText: messageData.repliedMessage,
                 repliedMessageType: messageData.repliedMessageType,
                 username: messageData.repliedTo,

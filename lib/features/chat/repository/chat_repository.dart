@@ -110,7 +110,6 @@ class ChatRepository {
         messageReply: messageReply,
         recieverUsername: recieverUserData.name,
         senderUsername: senderUser.name,
-      
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
@@ -259,17 +258,16 @@ class ChatRepository {
     );
 
     _saveMessageToMessageSubcollection(
-      recieverUserId: recieverUserId,
-      text: imageUrl,
-      timeSent: timeSent,
-      messageId: messageId,
-      username: senderUserData.name,
-      recieverUserName: recieverUserData.name,
-      messageType: messageEnum,
-      senderUsername: senderUserData.name,
-      messageReply:messageReply,
-      recieverUsername: recieverUserData.name
-    );
+        recieverUserId: recieverUserId,
+        text: imageUrl,
+        timeSent: timeSent,
+        messageId: messageId,
+        username: senderUserData.name,
+        recieverUserName: recieverUserData.name,
+        messageType: messageEnum,
+        senderUsername: senderUserData.name,
+        messageReply: messageReply,
+        recieverUsername: recieverUserData.name);
   }
 
   void sendGifMessage({
@@ -297,17 +295,47 @@ class ChatRepository {
       );
 
       _saveMessageToMessageSubcollection(
-        recieverUserId: recieverUserId,
-        text: gifUrl,
-        timeSent: timeSent,
-        messageType: MessageEnum.gif,
-        messageId: messageId,
-        username: senderUser.name,
-        recieverUserName: recieverUserData.name,
-        recieverUsername: recieverUserData.name,
-        messageReply: messageReply,
-        senderUsername: senderUser.name
-      );
+          recieverUserId: recieverUserId,
+          text: gifUrl,
+          timeSent: timeSent,
+          messageType: MessageEnum.gif,
+          messageId: messageId,
+          username: senderUser.name,
+          recieverUserName: recieverUserData.name,
+          recieverUsername: recieverUserData.name,
+          messageReply: messageReply,
+          senderUsername: senderUser.name);
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void setChatMessageSeen({
+    required BuildContext context,
+    required String recieverUserId,
+    required messageId,
+  }) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('chats')
+          .doc(recieverUserId)
+          .collection('messages')
+          .doc(messageId)
+          .update({
+        "isSeen": true,
+      });
+      await firestore
+          .collection('users')
+          .doc(recieverUserId)
+          .collection('chats')
+          .doc(auth.currentUser!.uid)
+          .collection('messages')
+          .doc(messageId)
+          .update({
+        "isSeen": true,
+      });
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
