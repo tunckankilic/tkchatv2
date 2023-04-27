@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+class Utils{
 
-void showSnackBar({required BuildContext context, required String content}) {
+static void showSnackBar({required BuildContext context, required String content}) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(content),
@@ -10,7 +11,7 @@ void showSnackBar({required BuildContext context, required String content}) {
   );
 }
 
-Future<File?> pickImageFromGallery(BuildContext context) async {
+static Future<File?> pickImageFromGallery(BuildContext context) async {
   File? image;
   try {
     final pickedImage =
@@ -25,7 +26,7 @@ Future<File?> pickImageFromGallery(BuildContext context) async {
   return image;
 }
 
-Future<File?> pickVideoFromGallery(BuildContext context) async {
+static Future<File?> pickVideoFromGallery(BuildContext context) async {
   File? video;
   try {
     final pickedVideo =
@@ -40,6 +41,7 @@ Future<File?> pickVideoFromGallery(BuildContext context) async {
   return video;
 }
 
+}
 // Future<GiphyGif?> pickGIF(BuildContext context) async {
 //   GiphyGif? gif;
 //   try {

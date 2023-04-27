@@ -57,7 +57,7 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context: context, content: e.message!);
+      Utils.   showSnackBar(context: context, content: e.message!);
     }
   }
 
@@ -78,7 +78,7 @@ class AuthRepository {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context: context, content: e.message!);
+      Utils.   showSnackBar(context: context, content: e.message!);
     }
   }
 
@@ -118,7 +118,7 @@ class AuthRepository {
           ),
           (route) => false);
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+      Utils.   showSnackBar(context: context, content: e.toString());
     }
   }
 

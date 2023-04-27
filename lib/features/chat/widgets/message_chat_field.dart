@@ -84,7 +84,7 @@ class _MessageChatFieldState extends ConsumerState<MessageChatField> {
   }
 
   void selectImage() async {
-    File? image = await pickImageFromGallery(context);
+    File? image = await   Utils.  pickImageFromGallery(context);
     if (image != null) {
       sendFileMessage(image, MessageEnum.image);
     }
@@ -108,7 +108,7 @@ class _MessageChatFieldState extends ConsumerState<MessageChatField> {
     try {
       gif = await Giphy.getGif(context: context, apiKey: apiKey);
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+       Utils.  showSnackBar(context: context, content: e.toString());
     }
     return gif;
   }

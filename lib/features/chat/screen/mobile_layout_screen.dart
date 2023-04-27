@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tkchatv2/common/utils/colors.dart';
+import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/widgets/contacts_list.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
+import 'package:tkchatv2/features/status/screen/confirm_status.dart';
+import 'package:tkchatv2/features/status/screen/status_screen.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
@@ -110,14 +115,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           controller: tabBarController,
           children: [
             ContactsList(),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Status"),
-                ],
-              ),
-            ),
+            StatusScreen(),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +128,15 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            Navigator.of(context).pushNamed(SelectContactsScreen.routeName);
+            if (tabBarController.index == 0) {
+              Navigator.of(context).pushNamed(SelectContactsScreen.routeName);
+            } else {
+              File? pickedImage = await   Utils.  pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.of(context).pushNamed(ConfirmStatusScreen.routeName,
+                    arguments: pickedImage);
+              }
+            }
           },
           backgroundColor: tabColor,
           child: const Icon(

@@ -58,13 +58,13 @@ class SelectContactsRepository {
         }
       }
       if (!isFound) {
-        showSnackBar(
+         Utils.  showSnackBar(
           context: context,
           content: "This number is not registered in the database",
         );
       }
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+      Utils.   showSnackBar(context: context, content: e.toString());
     }
   }
 }

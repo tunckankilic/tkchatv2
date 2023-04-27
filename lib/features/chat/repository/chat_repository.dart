@@ -112,7 +112,7 @@ class ChatRepository {
         senderUsername: senderUser.name,
       );
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+     Utils.    showSnackBar(context: context, content: e.toString());
     }
   }
 
@@ -306,7 +306,7 @@ class ChatRepository {
           messageReply: messageReply,
           senderUsername: senderUser.name);
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+      Utils.   showSnackBar(context: context, content: e.toString());
     }
   }
 
@@ -337,7 +337,7 @@ class ChatRepository {
         "isSeen": true,
       });
     } catch (e) {
-      showSnackBar(context: context, content: e.toString());
+      Utils.   showSnackBar(context: context, content: e.toString());
     }
   }
 }

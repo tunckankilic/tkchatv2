@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tkchatv2/common/widgets/error.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/screen/mobile_chat_screen.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
+import 'package:tkchatv2/features/status/screen/confirm_status.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -39,6 +42,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LandingScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const LandingScreen(),
+      );
+    case ConfirmStatusScreen.routeName:
+      final file = settings.arguments as File;
+      return MaterialPageRoute(
+        builder: (context) => ConfirmStatusScreen(file: file),
       );
     default:
       return MaterialPageRoute(
