@@ -9,6 +9,7 @@ import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/common/widgets/custom_button.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/widgets/contacts_list.dart';
+import 'package:tkchatv2/features/group/screens/create_group_screen.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:tkchatv2/features/status/screen/confirm_status.dart';
@@ -82,10 +83,15 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               ),
               itemBuilder: (context) => [
                 PopupMenuItem(
-                    child: const Text(
-                      'Create Group',
-                    ),
-                    onTap: () {})
+                  child: const Text(
+                    'Create Group',
+                  ),
+                  onTap: () {
+                    //avoid instant reaction
+                    Future(() => Navigator.of(context)
+                        .pushNamed(CreateGroupScreen.routeName));
+                  },
+                ),
               ],
             ),
           ],
@@ -131,7 +137,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             if (tabBarController.index == 0) {
               Navigator.of(context).pushNamed(SelectContactsScreen.routeName);
             } else {
-              File? pickedImage = await   Utils.  pickImageFromGallery(context);
+              File? pickedImage = await Utils.pickImageFromGallery(context);
               if (pickedImage != null) {
                 Navigator.of(context).pushNamed(ConfirmStatusScreen.routeName,
                     arguments: pickedImage);

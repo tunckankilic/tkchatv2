@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tkchatv2/common/widgets/error.dart';
 import 'package:tkchatv2/features/auth/auth.dart';
 import 'package:tkchatv2/features/chat/screen/mobile_chat_screen.dart';
+import 'package:tkchatv2/features/group/screens/create_group_screen.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:tkchatv2/features/status/screen/confirm_status.dart';
@@ -55,7 +56,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => StatusDisplayScreen(status: status),
       );
-
+    case CreateGroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => CreateGroupScreen(),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
