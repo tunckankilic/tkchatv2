@@ -12,7 +12,7 @@ import 'package:tkchatv2/features/chat/widgets/contacts_list.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:tkchatv2/features/status/screen/confirm_status.dart';
-import 'package:tkchatv2/features/status/screen/status_screen.dart';
+import 'package:tkchatv2/features/status/screen/status_list_screen.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);

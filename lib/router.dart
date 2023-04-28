@@ -7,6 +7,8 @@ import 'package:tkchatv2/features/chat/screen/mobile_chat_screen.dart';
 import 'package:tkchatv2/features/landing/screens/landing_screen.dart';
 import 'package:tkchatv2/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:tkchatv2/features/status/screen/confirm_status.dart';
+import 'package:tkchatv2/features/status/screen/status_display_screen.dart';
+import 'package:tkchatv2/models/status_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -48,6 +50,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => ConfirmStatusScreen(file: file),
       );
+    case StatusDisplayScreen.routeName:
+      final status = settings.arguments as Status;
+      return MaterialPageRoute(
+        builder: (context) => StatusDisplayScreen(status: status),
+      );
+
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
