@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,7 +10,6 @@ import 'package:tkchatv2/common/repositories/common_firebase_storage_repository.
 import 'package:tkchatv2/common/utils/utils.dart';
 import 'package:tkchatv2/models/group.dart';
 import 'package:uuid/uuid.dart';
-
 
 final groupRepositoryProvider = Provider(
   (ref) => GroupRepository(
@@ -36,13 +36,16 @@ class GroupRepository {
       for (int i = 0; i < selectedContact.length; i++) {
         var userCollection = await firestore
             .collection('users')
-            .where(
-              'phoneNumber',
-              isEqualTo: selectedContact[i].phones[0].number.replaceAll(
-                    ' ',
-                    '',
-                  ),
-            )
+            .where('phoneNumber',
+                isEqualTo: selectedContact[i]
+                    .phones[0]
+                    .number
+                    .replaceAll(
+                      ' ',
+                      '',
+                    )
+                    .replaceAll("(", "")
+                    .replaceAll(")", ""))
             .get();
 
         if (userCollection.docs.isNotEmpty && userCollection.docs[0].exists) {
@@ -68,7 +71,7 @@ class GroupRepository {
 
       await firestore.collection('groups').doc(groupId).set(group.toMap());
     } catch (e) {
-     Utils. showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 }

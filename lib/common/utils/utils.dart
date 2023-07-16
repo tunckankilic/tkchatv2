@@ -1,46 +1,46 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-class Utils{
 
-static void showSnackBar({required BuildContext context, required String content}) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(content),
-    ),
-  );
-}
-
-static Future<File?> pickImageFromGallery(BuildContext context) async {
-  File? image;
-  try {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      image = File(pickedImage.path);
-    }
-  } catch (e) {
-    showSnackBar(context: context, content: e.toString());
+class Utils {
+  static void showSnackBar(
+      {required BuildContext context, required String content}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(content),
+      ),
+    );
   }
-  return image;
-}
 
-static Future<File?> pickVideoFromGallery(BuildContext context) async {
-  File? video;
-  try {
-    final pickedVideo =
-        await ImagePicker().pickVideo(source: ImageSource.gallery);
+  static Future<File?> pickImageFromGallery(BuildContext context) async {
+    File? image;
+    try {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (pickedVideo != null) {
-      video = File(pickedVideo.path);
+      if (pickedImage != null) {
+        image = File(pickedImage.path);
+      }
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
     }
-  } catch (e) {
-    showSnackBar(context: context, content: e.toString());
+    return image;
   }
-  return video;
-}
 
+  static Future<File?> pickVideoFromGallery(BuildContext context) async {
+    File? video;
+    try {
+      final pickedVideo =
+          await ImagePicker().pickVideo(source: ImageSource.gallery);
+
+      if (pickedVideo != null) {
+        video = File(pickedVideo.path);
+      }
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+    return video;
+  }
 }
 // Future<GiphyGif?> pickGIF(BuildContext context) async {
 //   GiphyGif? gif;

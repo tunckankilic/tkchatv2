@@ -45,6 +45,7 @@ class StatusScreen extends ConsumerWidget {
                         ),
                         radius: 30,
                       ),
+                      
                     ),
                   ),
                 ),

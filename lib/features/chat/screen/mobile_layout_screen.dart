@@ -74,7 +74,11 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           actions: [
             IconButton(
               icon: const Icon(Icons.search, color: Colors.grey),
-              onPressed: () {},
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut().then((value) =>
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        LandingScreen.routeName, (route) => false));
+              },
             ),
             PopupMenuButton(
               icon: const Icon(
@@ -121,7 +125,15 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           controller: tabBarController,
           children: [
             ContactsList(),
-            StatusScreen(),
+            // StatusScreen(),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text("Status is on development"),
+                ],
+              ),
+            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

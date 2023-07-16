@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -108,7 +109,7 @@ class _MessageChatFieldState extends ConsumerState<MessageChatField> {
     try {
       gif = await Giphy.getGif(context: context, apiKey: apiKey);
     } catch (e) {
-       Utils.  showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
     return gif;
   }

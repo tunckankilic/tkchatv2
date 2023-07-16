@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,7 +85,7 @@ class ChatRepository {
   }) async {
     try {
       var timeSent = DateTime.now();
-      UserModel? recieverUserData;
+      UserModel recieverUserData;
       var userDataMap =
           await firestore.collection('users').doc(recieverUserId).get();
       recieverUserData = UserModel.fromMap(userDataMap.data()!);
@@ -112,7 +113,7 @@ class ChatRepository {
         senderUsername: senderUser.name,
       );
     } catch (e) {
-     Utils.    showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 
@@ -306,7 +307,7 @@ class ChatRepository {
           messageReply: messageReply,
           senderUsername: senderUser.name);
     } catch (e) {
-      Utils.   showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 
@@ -337,7 +338,7 @@ class ChatRepository {
         "isSeen": true,
       });
     } catch (e) {
-      Utils.   showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 }

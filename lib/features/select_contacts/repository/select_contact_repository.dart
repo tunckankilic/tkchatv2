@@ -64,7 +64,7 @@ class SelectContactsRepository {
         );
       }
     } catch (e) {
-      Utils.   showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 }

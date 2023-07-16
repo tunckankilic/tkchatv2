@@ -1,37 +1,45 @@
 {
   "project_info": {
-    "project_number": "913596461158",
-    "project_id": "tkchatv2",
-    "storage_bucket": "tkchatv2.appspot.com"
+    "project_number": "75575169568",
+    "project_id": "tkchatv2-204c7",
+    "storage_bucket": "tkchatv2-204c7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:913596461158:android:1a0acb4cd486d283dd7da7",
+        "mobilesdk_app_id": "1:75575169568:android:f884b491339eb68900a245",
         "android_client_info": {
           "package_name": "site.tunckankilic.tkchatv2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "913596461158-lnfdo4tq3t7ivokpieih5nlomqr798ro.apps.googleusercontent.com",
+          "client_id": "75575169568-s037rs24up5rto10h78qf5cuavd2uf7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "site.tunckankilic.tkchatv2",
+            "certificate_hash": "797ed72f498b72cfcf730e9678d721f3bef239dd"
+          }
+        },
+        {
+          "client_id": "75575169568-vri9ikbovurr8dqlheuicn2pie9thaou.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBj04OeZc695bIB5ht61Es_viooAz3z8MA"
+          "current_key": "AIzaSyBoXKEVEB61rzkcuhYMk5CDISwWLCHU5zI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "913596461158-lnfdo4tq3t7ivokpieih5nlomqr798ro.apps.googleusercontent.com",
+              "client_id": "75575169568-vri9ikbovurr8dqlheuicn2pie9thaou.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "913596461158-i50rj2f2g00r755lddefu1mvv3g9r1p7.apps.googleusercontent.com",
+              "client_id": "75575169568-5h2kghbjg5qb6fejc6qglu347uqmbblk.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "site.tunckankilic.tkchatv2"

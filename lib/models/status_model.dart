@@ -39,17 +39,13 @@ class Status {
       uid: map['uid'] ?? "",
       username: map['username'] ?? "",
       phoneNumber: map['phoneNumber'] ?? "",
-      photoUrl: List<String>.from(
-        map["photoUrl"],
-      ),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(
-        map["createdAt"],
-      ),
+      photoUrl: List<String>.from(map["photoUrl"]),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map["createdAt"]),
       profilePic: map['profilePic'] ?? "",
       statusId: map['statusId'] ?? "",
-      whoCanSee: List<String>.from(
-        (map['whoCanSee'] as List<String>),
-      ),
+      whoCanSee: (map['whoCanSee'] as List<dynamic>)
+          .map((item) => item.toString())
+          .toList(),
     );
   }
 }

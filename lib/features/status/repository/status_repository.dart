@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,6 +80,12 @@ class StatusRepository {
             'uid',
             isEqualTo: auth.currentUser!.uid,
           )
+          .where(
+            "createdAt",
+            isLessThan: DateTime.now().subtract(
+              Duration(hours: 24),
+            ),
+          )
           .get();
 
       if (statusesSnapshot.docs.isNotEmpty) {
@@ -94,6 +101,17 @@ class StatusRepository {
         return;
       } else {
         statusImageUrls = [imageurl];
+        Status status = Status(
+          uid: uid,
+          username: username,
+          phoneNumber: phoneNumber,
+          photoUrl: statusImageUrls,
+          createdAt: DateTime.now(),
+          profilePic: profilePic,
+          statusId: statusId,
+          whoCanSee: uidWhoCanSee,
+        );
+        await firestore.collection('status').doc(statusId).set(status.toMap());
       }
 
       Status status = Status(
@@ -109,7 +127,7 @@ class StatusRepository {
 
       await firestore.collection('status').doc(statusId).set(status.toMap());
     } catch (e) {
-      Utils.showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 
@@ -123,13 +141,16 @@ class StatusRepository {
       for (int i = 0; i < contacts.length; i++) {
         var statusesSnapshot = await firestore
             .collection('status')
-            .where(
-              'phoneNumber',
-              isEqualTo: contacts[i].phones[0].number.replaceAll(
-                    ' ',
-                    '',
-                  ),
-            )
+            .where('phoneNumber',
+                isEqualTo: contacts[i]
+                    .phones[0]
+                    .number
+                    .replaceAll(
+                      ' ',
+                      '',
+                    )
+                    .replaceAll("(", "")
+                    .replaceAll(")", ""))
             .where(
               'createdAt',
               isGreaterThan: DateTime.now()
@@ -140,13 +161,13 @@ class StatusRepository {
         for (var tempData in statusesSnapshot.docs) {
           Status tempStatus = Status.fromMap(tempData.data());
           if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
-            statusData.add(tempStatus);
+            statusData.addAll([tempStatus]);
           }
         }
       }
     } catch (e) {
       if (kDebugMode) print(e);
-      Utils.showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
     return statusData;
   }

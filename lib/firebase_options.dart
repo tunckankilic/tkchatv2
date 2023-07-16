@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBj04OeZc695bIB5ht61Es_viooAz3z8MA',
-    appId: '1:913596461158:android:1a0acb4cd486d283dd7da7',
-    messagingSenderId: '913596461158',
-    projectId: 'tkchatv2',
-    storageBucket: 'tkchatv2.appspot.com',
+    apiKey: 'AIzaSyBoXKEVEB61rzkcuhYMk5CDISwWLCHU5zI',
+    appId: '1:75575169568:android:f884b491339eb68900a245',
+    messagingSenderId: '75575169568',
+    projectId: 'tkchatv2-204c7',
+    storageBucket: 'tkchatv2-204c7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDBZ5QgyJKH8g1h65Xgck9ynbENQqpeNx4',
-    appId: '1:913596461158:ios:b266d43740b5abcadd7da7',
-    messagingSenderId: '913596461158',
-    projectId: 'tkchatv2',
-    storageBucket: 'tkchatv2.appspot.com',
-    iosClientId: '913596461158-i50rj2f2g00r755lddefu1mvv3g9r1p7.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDWSZa5hsATWTaS3aCcoMAIX-y_d7D5xAg',
+    appId: '1:75575169568:ios:8ea0e6ccb8a6e32300a245',
+    messagingSenderId: '75575169568',
+    projectId: 'tkchatv2-204c7',
+    storageBucket: 'tkchatv2-204c7.appspot.com',
+    iosClientId: '75575169568-5h2kghbjg5qb6fejc6qglu347uqmbblk.apps.googleusercontent.com',
     iosBundleId: 'site.tunckankilic.tkchatv2',
   );
 }

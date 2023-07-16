@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -57,7 +58,7 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
-      Utils.   showSnackBar(context: context, content: e.message!);
+      log("error: $e");
     }
   }
 
@@ -78,7 +79,7 @@ class AuthRepository {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      Utils.   showSnackBar(context: context, content: e.message!);
+      log("error: $e");
     }
   }
 
@@ -91,8 +92,7 @@ class AuthRepository {
     try {
       String uid = auth.currentUser!.uid;
       String photoUrl =
-          "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftr.wikipedia.org%2Fwiki%2FDosya%3APerson_icon_BLACK-01.svg&psig=AOvVaw07VSQ_qDU3FuiLjSmBgXcD&ust=1681927167292000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNDyzIyBtP4CFQAAAAAdAAAAABAE";
-
+          'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png';
       if (profilePic != null) {
         photoUrl = await ref
             .read(commonFirebaseStorageRepositoryProvider)
@@ -118,7 +118,7 @@ class AuthRepository {
           ),
           (route) => false);
     } catch (e) {
-      Utils.   showSnackBar(context: context, content: e.toString());
+      log("error: $e");
     }
   }
 

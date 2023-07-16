@@ -65,7 +65,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
                 image == null
                     ? const CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "https://scontent.fist2-3.fna.fbcdn.net/v/t1.6435-9/97118022_963873147398208_5016586750223450112_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=73WPaw_Rne0AX9AnPnf&_nc_ht=scontent.fist2-3.fna&oh=00_AfAYVhdkKcWa3slkC-iPNsyhIPU2TzVhWxlLhEmHA83FuQ&oe=6473B638"),
+                            "https://scontent.fist2-3.fna.fbcdn.net/v/t1.6435-9/97118022_963873147398208_5016586750223450112_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=mUIzuS3-ZUcAX_l4j-3&_nc_ht=scontent.fist2-3.fna&oh=00_AfC_wCd0aDWJsuWoHZpnH6N873ZKII_FLkL_EKACwZWL7w&oe=64DA1AB8"),
                         radius: 64,
                       )
                     : CircleAvatar(
