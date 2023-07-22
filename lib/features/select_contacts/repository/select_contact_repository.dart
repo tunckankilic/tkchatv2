@@ -53,12 +53,14 @@ class SelectContactsRepository {
             arguments: {
               'name': userData.name,
               'uid': userData.uid,
+              "groupChat": false,
+              "profilePic": userData.profilePic,
             },
           );
         }
       }
       if (!isFound) {
-         Utils.  showSnackBar(
+        Utils.showSnackBar(
           context: context,
           content: "This number is not registered in the database",
         );
